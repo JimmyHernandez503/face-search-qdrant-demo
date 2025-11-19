@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+env/
+*.log
+
+# Docker / runtime
+logs/
+state/
+thumbs/
+qdrant_storage/
+models/
+
+# Backups / compresiones
+*.tgz
+*.tar
+*.tar.gz
+*.zip
+
+# Editor
+.vscode/
+.idea/
+*.swp

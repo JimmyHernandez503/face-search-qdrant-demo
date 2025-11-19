@@ -1,0 +1,50 @@
+services:
+  api:
+    container_name: infierno-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+
+    # API interna escucha en 7860 => host 9000
+    ports:
+      - "9000:7860"
+
+    environment:
+      # URL HTTP principal hacia Qdrant (dentro de la red docker)
+      - QDRANT_URL=http://qdrant:6333
+      - QDRANT_GRPC_URL=http://qdrant:6334
+
+      # Por si alguna parte del código usa host/port sueltos
+      - QDRANT_HOST=qdrant
+      - QDRANT_PORT=6333
+      - QDRANT_GRPC_HOST=qdrant
+      - QDRANT_GRPC_PORT=6334
+
+    depends_on:
+      - qdrant
+
+    volumes:
+      # logs / estado / thumbs / modelos
+      - ./logs:/logs
+      - ./state:/state
+      - ./thumbs:/data/thumbs
+      - ./models:/models
+      # home del host montado como /hosthome (para rutas tipo /hosthome/...)
+      - /home/user2025:/hosthome
+
+    # Usa GPU si está disponible
+    gpus: all
+
+  qdrant:
+    container_name: infierno-qdrant
+    image: qdrant/qdrant:v1.9.1
+    restart: unless-stopped
+
+    # Qdrant interno: 6333/6334 → host: 9001/9002
+    ports:
+      - "9001:6333"
+      - "9002:6334"
+
+    volumes:
+      - ./qdrant_storage:/qdrant/storage

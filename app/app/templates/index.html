@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>oceano4 - Reconocimiento facial</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Oceano4 · Reconocimiento facial</h1>
+    <form action="/search" method="post" enctype="multipart/form-data" class="card">
+      <label>Sube una foto (rostro):</label>
+      <input type="file" name="file" accept="image/*" required />
+      <button type="submit">Buscar top-10</button>
+    </form>
+
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if items %}
+      <h2>Resultados (Top-10)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Similarity</th>
+            <th>DUI</th>
+            <th>Vista</th>
+            <th>Ruta (host)</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for it in items %}
+          <tr>
+            <td>{{ it.percent }}%</td>
+            <td class="mono">{{ it.dui }}</td>
+            <td>
+              {% if it.thumb %}
+                <img src="{{ it.thumb }}" class="thumb"/>
+              {% else %}
+                —
+              {% endif %}
+            </td>
+            <td class="path">{{ it.path }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+    <div class="muted">
+      <p><b>Notas:</b> similitud = <i>cosine similarity</i> (100% = idéntico). Thumbnails se generan en la ingesta.</p>
+    </div>
+  </div>
+</body>
+</html>

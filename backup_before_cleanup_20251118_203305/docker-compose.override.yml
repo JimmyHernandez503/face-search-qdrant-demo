@@ -1,0 +1,5 @@
+services:
+  api:
+    volumes:
+      - /home/user2025:/hosthome:ro
+      - ./models:/models
