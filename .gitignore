@@ -24,3 +24,9 @@ models/
 .vscode/
 .idea/
 *.swp
+
+# Snapshots locales que no van al repo
+backup_before_cleanup_*/
+oceano4_backup_*.tgz
+*.tgz
+
