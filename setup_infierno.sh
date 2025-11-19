@@ -8,7 +8,8 @@ set -euo pipefail
 #  configura NVIDIA Toolkit y despliega la app (API+Qdrant) con GPU.
 # =========================================================
 
-BASE="/home/user2025/infierno"
+# Directorio base del proyecto (carpeta donde está este script)
+BASE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 APP="$BASE/app"
 LOGS="$BASE/logs"
 STATE="$BASE/state"

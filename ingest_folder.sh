@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+
+# Directorio base del proyecto (carpeta donde está este script)
+BASE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Directorio HOME del host (por defecto, \$HOME del usuario actual)
+HOST_HOME="${HOST_HOME:-$HOME}"
+
 set -euo pipefail
 
 # Carpeta base = donde está este script
@@ -24,7 +31,6 @@ if [ ! -d "$SRC" ]; then
 fi
 
 # HOME del host
-HOST_HOME="${HOST_HOME:-/home/user2025}"
 echo "[DBG] HOST_HOME = $HOST_HOME"
 
 if [[ "$SRC" != "$HOST_HOME"* ]]; then

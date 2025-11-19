@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BASE="/home/user2025/infierno"
+# Directorio base del proyecto (carpeta donde está este script)
+BASE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BK_DIR="$BASE/backup"
 TS="$(date +%Y%m%d_%H%M%S)"
 OUT="$BK_DIR/infierno_backup_${TS}.tgz"

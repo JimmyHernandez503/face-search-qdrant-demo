@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
+
+# Directorio base del proyecto (carpeta donde está este script)
+BASE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Ruta por defecto de la base de datos de ingesta (se puede sobrescribir con \$DB)
+DB="${DB:-"$BASE/state/ingestion.db"}"
+
 set -euo pipefail
-DB="/home/user2025/infierno/state/ingestion.db"
 if [ ! -f "$DB" ]; then
   echo "No existe $DB aún (ingesta no iniciada)."
   exit 0

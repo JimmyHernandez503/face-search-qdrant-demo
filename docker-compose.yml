@@ -31,7 +31,7 @@ services:
       - ./thumbs:/data/thumbs
       - ./models:/models
       # home del host montado como /hosthome (para rutas tipo /hosthome/...)
-      - /home/user2025:/hosthome
+      - ${HOME}:/hosthome
 
     # Usa GPU si está disponible
     gpus: all
